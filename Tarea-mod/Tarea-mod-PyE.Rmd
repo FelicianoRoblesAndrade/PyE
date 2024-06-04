@@ -1,0 +1,78 @@
+---
+#title: "Tarea-mod-PyE"
+#author: "Feliciano"
+#date: "2024-06-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Tarea 1 - Probabilidad y Estadística
+## OBJETIVO
+1. Identificar variables aleatorias comunes y sus distribuciones en contextos dados
+2. Aplicar propiedades de la probabilidad para resolver problemas
+3. Identificar comandos de R para el cálculo de probabilidades
+4. Analizar la forma de las funciones de probabilidad (o densidad) de variables aleatorias comunes
+5. Crear archivos RMarkdown
+
+## INSTRUCCIONES
+
+1. Identifique la variable aleatoria y distribución que resuelve cada uno de los problemas planteados
+2. Resuelva los ejercicios utilizando R
+3. Escriba sus respuestas en un archivo R Markdown
+4. Envíe en html sus respuestas al apartado correspondiente en el grupo de Teams
+
+## Ejercicio 1
+
+Se convocaron a estudiantes de enfermería y al público en general para registrarse y apoyar como voluntario en los puestos de vacunación contra covid. Si 7 de cada 10 voluntarios son estudiantes de enfermería:
+
+  1. Calcule la probabilidad de que se necesiten 40 voluntarios registrados para completar 20 estudiantes de enfermería.
+
+  2. Calcule la probabilidad de que se necesiten 30 voluntarios registrados para completar 20 estudiantes de enfermería.
+
+  3. Grafique la función de probabilidad (o densidad) utilizada
+
+## Ejercicio 2
+
+Los precios nacionales por arrendamiento de tanques con oxígeno medicinal con capacidad para 10,000 litros de oxígeno, tan demandados durante la contingencia sanitaria por covid, tienen una media de MX$1177 y una desviación estándar de MX$972. Si se elige una muestra de 40 tanques:
+
+  1. Aproxime la probabilidad de que la media muestral de sus precios se encuentre entre MX$1000 y MX$1200 pesos.
+
+  2. Grafique la función de probabilidad (o densidad) utilizada.
+
+## Ejercicio 3
+
+Ante la demanda ocasionada por la pandemia de covid, se realizó una investigación de los precios por recargas de oxígeno medicinal en cilindros con capacidad para 10,000 litros de oxígeno. Si el precio ofrecido por los proveedores nacionales sigue una distribución normal con media de MX$731 y desviación estándar de MX$175:
+
+  1. Calcule el porcentaje de tanques cuyo precio oscila entre MX$600 y MX$700.
+
+  2. Calcule el porcentaje de tanques cuyo precio es de al menos MX$800.
+
+  3. Grafique la función de probabilidad (o densidad) utilizada.
+
+## Ejercicio 4
+
+El primer filtro en un puesto de vacunación contra covid, consiste en preguntar a las personas si han presentado en la última semana alguno de los síntomas asociados a la enfermedad como tos y fiebre. Si alguna persona ha presentado al menos uno de estos síntomas, se le invita a pasar a responder un cuestionario más detallado con profesionales de la salud para decidir si es conveniente vacunarlo o no. Si de registros previos se sabe que el 97% de las personas que acuden a vacunarse no han presentado síntomas en la última semana:
+
+  1. Calcule la probabilidad de que se necesiten encuestar a 100 personas para encontrar a la primera que pasará a responder el cuestionario detallado.
+
+  2. Calcule la probabilidad de que la 50° persona sea la primera que pasará a responder el cuestionario detallado.
+
+  3. Calcule la probabilidad de que la primera persona encuestada sea la primera que pasará a responder el cuestionario detallado.
+
+  4. Grafique la función de probabilidad (o densidad) utilizada.
+
+## Ejercicio 5
+
+Durante el proceso de vacunación contra covid, se aplicaron en cierto centro de salud 100 vacunas de la marca Moderna, y 200 de la marca Pfizer. Si de las 300 personas vacunadas se selecciona una muestra de 15, y se les contacta por teléfono para dar seguimiento e investigar las posibles reacciones provocadas por la vacuna:
+
+  1. Calcule la probabilidad de que todas personas seleccionadas en la muestra hayan sido vacunadas con la vacuna Moderna.
+
+  2. Calcule la probabilidad de que dos o más de las personas de la muestra hayan sido vacunadas con Moderna
+
+  3. Calcule la probabilidad de que entre 7 y 10 personas hayan sido vacunadas con Pfizer
+
+  4. Grafique la función de probabilidad (o densidad) utilizada.
+
