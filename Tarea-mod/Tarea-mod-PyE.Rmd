@@ -4,6 +4,10 @@
 #date: "2024-06-04"
 output: html_document
 ---
+<style>
+r { color: Red }
+b { color: Blue }
+</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -28,11 +32,48 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Se convocaron a estudiantes de enfermería y al público en general para registrarse y apoyar como voluntario en los puestos de vacunación contra covid. Si 7 de cada 10 voluntarios son estudiantes de enfermería:
 
-  1. Calcule la probabilidad de que se necesiten 40 voluntarios registrados para completar 20 estudiantes de enfermería.
+<r>En este caso la variable aleatoria seria si la persona voluntariada es un estudiante de enfermeria o alguien del público en general (v.a. d.c.:Bernoulli).</r>
 
+  1. Calcule la probabilidad de que se necesiten 40 voluntarios registrados para completar 20 estudiantes de enfermería.
+  
+  <r>El espacio muestral en este caso nomas es de 2, o el voluntario es estudiante de enfermeria o no lo es, y esto
+  se repite la cantidad de veces que se realizara el experimento (en este caso, 40 veces), podiendo concluir que se tiene una variable
+  de la forma binomial, cuya funcion de probabilidad acumuladad tiene la forma: 
+  $$f(i) \;=\; P(X=x)  \;=\; {n\choose x} p^x\, (1-p)^{n-x}, \qquad x=0,1,2, \ldots, n$$
+  donde $X$= Número total de exitos  $x=$ exitos  $n=$ tamaño muestral  $p=$ probabilidad de éxito
+  
+  pero como estamos manejando R, solo basta con utilizar el comando para variables aleatorias binomiales: "dbinom(x,size=n,prob=p)", entonces, calculando rapidamente la probabilidad de éxito:
+  $$p=\frac{x}{n}=\frac{7}{10}=0.7$$
+  reemplazando en la funcion de probabilidad binomial de R, tenemos que:
+```{r}
+dbinom(20,size=40,prob=0.7)
+```
+  
+  </r>
+  
+  <b>Teniendo una probabilidad aproximada de 0.38%</b>
+  
   2. Calcule la probabilidad de que se necesiten 30 voluntarios registrados para completar 20 estudiantes de enfermería.
+  
+  <r> Mismo procedimiento que el numero anterior, nomas cambiando el tamaño muestral $n=30$, teniendo asi:
+```{r}
+dbinom(20,size=30,prob=0.7)
+```
+  
+  <b>Teniendo una probabilidad aproximada de 14.16%</b>
 
   3. Grafique la función de probabilidad (o densidad) utilizada
+  
+  <r>Solo es cuestion de utilizar la funcion de plot que se tiene para R, usando de argumento para cada elemento de las abscisas, la cantidad de exitos, y en las ordenadas el resultado de la probabilidad de exito que se tiene dicha cantidad</r>
+  
+  <b> Resultando en la grafica:</b>
+```{r}
+n=40
+x<-seq(0,n,1)
+
+plot(dbinom(x=x, size = n, prob = 0.7),main = "Función de probabilidad binomial",ylab = "P(X = x)", xlab = "Número de éxitos",col="blue")
+```
+
 
 ## Ejercicio 2
 
