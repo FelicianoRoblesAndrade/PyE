@@ -95,10 +95,13 @@ print(a)
 
   2. Grafique la función de probabilidad (o densidad) utilizada.
 ```{r}
-n=10000
-x<-seq(0,n,100)
+n=40
+md=1177
+ds=972/sqrt(n)
+ran=md-4 # Como la 68% de los datos son entre +-\1sigma,95% para +-2, 99% para +-3\sigma, entonces utilizamos el rango
+x<-seq(md-3*ds,md+3*ds,1)
 
-plot(dnorm(x,md,ds),main = "Función de probabilidad binomial",ylab = "P(X = x)", xlab = "Número de éxitos",col="blue")
+plot(dnorm(x,md,ds),main = "Función de densidad normal",ylab = "P(X = x)", xlab = "Precio",col="blue")
 ```
 
 ## Ejercicio 3
