@@ -1,8 +1,7 @@
 ---
-#title: "Tarea-mod-PyE"
-#author: "Feliciano"
-#date: "2024-06-04"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 <style>
 r { color: Red }
@@ -156,22 +155,88 @@ plot(dnorm(x,md,ds),main = "Funcion de densidad normal",ylab = "P(X = x)", xlab 
 El primer filtro en un puesto de vacunación contra covid, consiste en preguntar a las personas si han presentado en la última semana alguno de los síntomas asociados a la enfermedad como tos y fiebre. Si alguna persona ha presentado al menos uno de estos síntomas, se le invita a pasar a responder un cuestionario más detallado con profesionales de la salud para decidir si es conveniente vacunarlo o no. Si de registros previos se sabe que el 97% de las personas que acuden a vacunarse no han presentado síntomas en la última semana:
 
   1. Calcule la probabilidad de que se necesiten encuestar a 100 personas para encontrar a la primera que pasará a responder el cuestionario detallado.
+  
+  <r>El experimento en este caso es si la persona muestra sintomas, y por ende, pasa a contestar un cuestionario detallado, siendo el espacio muestra solamente el evento de presentar sintomas, o el evento de no presentarlos, hablando asi entonces de una variable discreta de Bernoulli, y como se calcula la cantidad de fallos necesarios para un exito, se puede entender que hablamos de distribucion geometrica, por lo que podemos usar la funcion de probabilidad geometrica, siendo el comando en R para calcular casos especificos "dgeom" y "pgeom" para casos de probabilidad acumulada. Teniendo asi entonces</r>
+  
+```{r}
+n=100
+p=dgeom(n-1,0.03) # Restando 1, ya que en R no se incluye el exito en la X, a diferencia de algunos libros y autores
+print(p)
+```
+  <b>Teniendo una probabilidad aproximada de 00.15%</b>
 
   2. Calcule la probabilidad de que la 50° persona sea la primera que pasará a responder el cuestionario detallado.
+```{r}
+n=50 
+p=dgeom(n-1,0.03) # Restando 1, ya que en R no se incluye el exito en la X, a diferencia de algunos libros y autores
+print(p)
+```
+  <b>Teniendo una probabilidad aproximada de 00.67%</b>
 
   3. Calcule la probabilidad de que la primera persona encuestada sea la primera que pasará a responder el cuestionario detallado.
+```{r}
+n=1
+p=dgeom(n-1,0.03) # Restando 1, ya que en R no se incluye el exito en la X, a diferencia de algunos libros y autores
+print(p)
+```
 
+  <b>Teniendo una probabilidad aproximada de 3%</b>
+  
   4. Grafique la función de probabilidad (o densidad) utilizada.
+  
+  <b>Grafica</b>
+```{r}
+x<-seq(0,150,1)
 
+plot(dgeom(x,0.03),main = "Funcion de densidad normal",ylab = "P(X = x)", xlab = "Precio",col="blue")
+```
 ## Ejercicio 5
 
 Durante el proceso de vacunación contra covid, se aplicaron en cierto centro de salud 100 vacunas de la marca Moderna, y 200 de la marca Pfizer. Si de las 300 personas vacunadas se selecciona una muestra de 15, y se les contacta por teléfono para dar seguimiento e investigar las posibles reacciones provocadas por la vacuna:
 
   1. Calcule la probabilidad de que todas personas seleccionadas en la muestra hayan sido vacunadas con la vacuna Moderna.
-
+  <r>El experimento en este caso es saber que vacuna fue aplicada en una persona, siendo el espacio muestra el evento de ser vacunado con Moderna, o el evento de ser vacunados por Pfizer, hablando asi entonces de una variable discreta, y al elegir una muestra $n$ de entre $N(tipo1)+M(tipo2)$ objetos, se puede entender que hablamos de distribucion hipergeometrica, siendo el comando en R para calcular casos especificos "dhyper" y "phyper" para casos de probabilidad acumulada. Teniendo asi entonces</r>
+  
   2. Calcule la probabilidad de que dos o más de las personas de la muestra hayan sido vacunadas con Moderna
+```{r}
+n=15 # Muestra
+N=100 # Moderna / Tipo 1
+M=200 # Pfizer / Tipo 2
+p=1-phyper(2,N,M,n) # Queremos la prob del tipo 1
+print(p)
+```
+  <b>Teniendo una probabilidad aproximada de 92.59%</b>
 
   3. Calcule la probabilidad de que entre 7 y 10 personas hayan sido vacunadas con Pfizer
+```{r}
+n=15 # Muestra
+N=100 # Moderna / Tipo 1
+M=200 # Pfizer / Tipo 2
+a=7
+b=10
+p=phyper(b,M,N,n)-phyper(a,M,N,n) # Queremos la prob del tipo 2
+print(p)
+```
+  <b>Teniendo una probabilidad aproximada de 51.68%</b>
 
   4. Grafique la función de probabilidad (o densidad) utilizada.
+  
+  <b>Grafica tipoa 1</b>
+```{r}
+n=15 # Muestra
+x<-seq(0,n,1)
+N=100 # Moderna / Tipo 1
+M=200 # Pfizer / Tipo 2
 
+plot(phyper(x,N,M,n),main = "Personas vacunadas con la vacuna marca Pfzier",ylab = "Probabilidad", xlab = "Personas vacunadas con la vacuna marca Pfzier",col="blue")
+```
+  
+  <b>Grafica tipo 2</b>
+```{r}
+n=15 # Muestra
+x<-seq(0,n,1)
+N=100 # Moderna / Tipo 1
+M=200 # Pfizer / Tipo 2
+
+plot(phyper(x,M,N,n),main = "Pfzier",ylab = "P(X = x)", xlab = "Personas vacunadas con la vacuna marca Pfzier",col="blue")
+```
