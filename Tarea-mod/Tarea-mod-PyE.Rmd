@@ -80,8 +80,26 @@ plot(dbinom(x=x, size = n, prob = 0.7),main = "Función de probabilidad binomial
 Los precios nacionales por arrendamiento de tanques con oxígeno medicinal con capacidad para 10,000 litros de oxígeno, tan demandados durante la contingencia sanitaria por covid, tienen una media de MX$1177 y una desviación estándar de MX$972. Si se elige una muestra de 40 tanques:
 
   1. Aproxime la probabilidad de que la media muestral de sus precios se encuentre entre MX$1000 y MX$1200 pesos.
+  
+  <r>Nuestro experimento es consultar el precio del tanque de oxigeno, la variable aleatoria continua es el precio(ya que puede tomar valores entre dos numeros cualquiera), el espacio muestral y eventos serian todos los precios posibles, con una desviacion estandar de $\sigma=972$ y una media de $\mu=1177$, por lo que se utiliza la funcion de densidad para el caso normal, con dichos datos, asi como el hecho que, para $f(x)$ para $1000\leq x\leq 1200$, se calcula como $f(1200)-f(1000)$, o bien, en derminos de Rstudio, $dnorm(xf,ds,\mu)-dnorm(xi,ds,\mu)$ donde $ds=\frac{\sigma}{\sqrt{n}}$</r>
+```{r}
+n=40
+md=1177
+ds=972/sqrt(n)
+xf=1200
+xi=1000
+a=dnorm(xf,md,ds)-dnorm(xi,md,ds)
+print(a)
+```
+
 
   2. Grafique la función de probabilidad (o densidad) utilizada.
+```{r}
+n=10000
+x<-seq(0,n,100)
+
+plot(dnorm(x,md,ds),main = "Función de probabilidad binomial",ylab = "P(X = x)", xlab = "Número de éxitos",col="blue")
+```
 
 ## Ejercicio 3
 
