@@ -59,6 +59,7 @@ dbinom(20,size=40,prob=0.7)
 ```{r}
 dbinom(20,size=30,prob=0.7)
 ```
+  </r>
   
   <b>Teniendo una probabilidad aproximada de 14.16%</b>
 
@@ -81,19 +82,23 @@ Los precios nacionales por arrendamiento de tanques con oxígeno medicinal con c
 
   1. Aproxime la probabilidad de que la media muestral de sus precios se encuentre entre MX$1000 y MX$1200 pesos.
   
-  <r>Nuestro experimento es consultar el precio del tanque de oxigeno, la variable aleatoria continua es el precio(ya que puede tomar valores entre dos numeros cualquiera), el espacio muestral y eventos serian todos los precios posibles, con una desviacion estandar de $\sigma=972$ y una media de $\mu=1177$, por lo que se utiliza la funcion de densidad para el caso normal, con dichos datos, asi como el hecho que, para $f(x)$ para $1000\leq x\leq 1200$, se calcula como $f(1200)-f(1000)$, o bien, en derminos de Rstudio, $dnorm(xf,ds,\mu)-dnorm(xi,ds,\mu)$ donde $ds=\frac{\sigma}{\sqrt{n}}$</r>
+  <r>Nuestro experimento es consultar el precio del tanque de oxigeno, la variable aleatoria continua es el precio(ya que puede tomar valores entre dos numeros cualquiera), el espacio muestral y eventos serian todos los precios posibles, con una desviacion estandar de $\sigma=972$ y una media de $\mu=1177$, por lo que se utiliza la funcion de densidad para el caso normal, con dichos datos, asi como el hecho que, $f(x)$ para $a\leq x\leq b$, se calcula como $f(b)-f(a)$, o bien, en derminos de Rstudio, $dnorm(xf,ds,\mu)-dnorm(xi,ds,\mu)$ donde $ds=\frac{\sigma}{\sqrt{n}}$</r>
 ```{r}
 n=40
 md=1177
 ds=972/sqrt(n)
-xf=1200
-xi=1000
-a=dnorm(xf,md,ds)-dnorm(xi,md,ds)
-print(a)
+b=1200
+a=1000
+p=pnorm(b,md,ds)-pnorm(a,md,ds)
+print(p)
 ```
-
+  <b>Teniendo una probabilidad aproximada de 43.48%</b>
 
   2. Grafique la función de probabilidad (o densidad) utilizada.
+  
+  <r>Solo es cuestion de utilizar la funcion de plot que se tiene para R, usando de argumento para cada elemento de las abscisas, el precio, y en las ordenadas el resultado de la probabilidad de que ese precio sea lo que cueste el tanque de oxigeno</r>
+  
+  <b> Resultando en la grafica:</b>
 ```{r}
 n=40
 md=1177
@@ -101,7 +106,7 @@ ds=972/sqrt(n)
 ran=md-4 # Como la 68% de los datos son entre +-\1sigma,95% para +-2, 99% para +-3\sigma, entonces utilizamos el rango
 x<-seq(md-3*ds,md+3*ds,1)
 
-plot(dnorm(x,md,ds),main = "Función de densidad normal",ylab = "P(X = x)", xlab = "Precio",col="blue")
+plot(dnorm(x,md,ds),main = "Funcion de densidad normal",ylab = "P(X = x)", xlab = "Precio",col="blue")
 ```
 
 ## Ejercicio 3
@@ -109,10 +114,42 @@ plot(dnorm(x,md,ds),main = "Función de densidad normal",ylab = "P(X = x)", xlab
 Ante la demanda ocasionada por la pandemia de covid, se realizó una investigación de los precios por recargas de oxígeno medicinal en cilindros con capacidad para 10,000 litros de oxígeno. Si el precio ofrecido por los proveedores nacionales sigue una distribución normal con media de MX$731 y desviación estándar de MX$175:
 
   1. Calcule el porcentaje de tanques cuyo precio oscila entre MX$600 y MX$700.
-
+  
+  <r>Nuestro experimento es consultar el precio de recargas de oxígeno medicinal en cilindros, la variable aleatoria continua es el precio(ya que puede tomar valores entre dos numeros cualquiera), el espacio muestral y eventos serian todos los precios posibles, con una desviacion estandar de $\sigma=175$ y una media de $\mu=731$, por lo que se utiliza la funcion de densidad para el caso normal, con dichos datos, asi como el hecho que, para $f(x)$ para $a\leq x\leq b$, se calcula como $f(b)-f(a)$, o bien, en derminos de Rstudio, $dnorm(b,ds,\mu)-dnorm(a,ds,\mu)$ donde $ds=\sigma$</r>
+```{r}
+md=731
+ds=175
+b=700
+a=600
+p=pnorm(b,md,ds)-pnorm(a,md,ds)
+print(p)
+```
+  <b>Teniendo una probabilidad aproximada de 20.26%</b>
+  
   2. Calcule el porcentaje de tanques cuyo precio es de al menos MX$800.
-
+```{r}
+md=731
+ds=175
+a=800
+p=1-pnorm(a,md,ds)
+print(p)
+```
+  <b>Teniendo una probabilidad aproximada de 34.67%</b>
+  
   3. Grafique la función de probabilidad (o densidad) utilizada.
+  
+  <r>Solo es cuestion de utilizar la funcion de plot que se tiene para R, usando de argumento para cada elemento de las abscisas, el precio, y en las ordenadas el resultado de la probabilidad de que la recarga cueste dicho precio</r>
+  
+  <b> Resultando en la grafica:</b>
+
+```{r}
+md=731
+ds=175
+ran=md-4 # Como la 68% de los datos son entre +-\1sigma,95% para +-2, 99% para +-3\sigma, entonces utilizamos el rango
+x<-seq(md-3*ds,md+3*ds,1)
+
+plot(dnorm(x,md,ds),main = "Funcion de densidad normal",ylab = "P(X = x)", xlab = "Precio",col="blue")
+```
 
 ## Ejercicio 4
 
