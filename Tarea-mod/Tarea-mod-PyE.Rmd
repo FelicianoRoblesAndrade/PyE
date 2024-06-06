@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 <style>
 r { color: Red }
@@ -45,7 +45,10 @@ Se convocaron a estudiantes de enfermería y al público en general para registr
   $$p=\frac{x}{n}=\frac{7}{10}=0.7$$
   reemplazando en la funcion de probabilidad binomial de R, tenemos que:
 ```{r}
-dbinom(20,size=40,prob=0.7)
+x=20
+n=40
+p=0.7
+dbinom(x,n,p) # exitos, ensayos de Bernoulli, probabilidad de exito
 ```
   
   </r>
@@ -56,7 +59,10 @@ dbinom(20,size=40,prob=0.7)
   
   <r> Mismo procedimiento que el numero anterior, nomas cambiando el tamaño muestral $n=30$, teniendo asi:
 ```{r}
-dbinom(20,size=30,prob=0.7)
+x=20
+n=30
+p=0.7
+dbinom(x,n,p) # exitos, ensayos de Bernoulli, probabilidad de exito
 ```
   </r>
   
@@ -67,11 +73,18 @@ dbinom(20,size=30,prob=0.7)
   <r>Solo es cuestion de utilizar la funcion de plot que se tiene para R, usando de argumento para cada elemento de las abscisas, la cantidad de exitos, y en las ordenadas el resultado de la probabilidad de exito que se tiene dicha cantidad</r>
   
   <b> Resultando en la grafica:</b>
+  
 ```{r}
-n=40
-x<-seq(0,n,1)
+x=20
+n1=40
+n2=30
+n<-seq(0,max(n1,n2),1)
+p=0.7
 
-plot(dbinom(x=x, size = n, prob = 0.7),main = "Función de probabilidad binomial",ylab = "P(X = x)", xlab = "Número de éxitos",col="blue")
+plot(n,dbinom(x,n,p),main = "Función de probabilidad binomial",ylab = "P(X = x)", xlab = "Número de éxitos",col="blue") 
+points(n1,dbinom(x,n1,p),col="red")
+points(n2,dbinom(x,n2,p),col="green")
+legend("topright", legend = c(paste0("n=",n1),paste0("n=",n2)),lwd = 3, col = c("red", "green"))
 ```
 
 
@@ -103,9 +116,14 @@ n=40
 md=1177
 ds=972/sqrt(n)
 ran=md-4 # Como la 68% de los datos son entre +-\1sigma,95% para +-2, 99% para +-3\sigma, entonces utilizamos el rango
-x<-seq(md-3*ds,md+3*ds,1)
+x<-seq(1,2000,1)
 
-plot(dnorm(x,md,ds),main = "Funcion de densidad normal",ylab = "P(X = x)", xlab = "Precio",col="blue")
+plot(x,dnorm(x,md,ds),main = "Probabilidad de precios por arrendamiento de tanques de oxigeno",ylab = "Probabilidad", xlab = "Precio(MXM)",col="blue",xlim=c(md-3*ds,md+3*ds),fg = "gray")
+abline(h = 0)
+x<-seq(1000,1200,1)
+lines(x,dnorm(x,md,ds),type="h",col="red")
+lines(md,dnorm(md,md,ds),type="h",col="green",lwd=2)
+legend("topright", legend = c("p(x),1000<x<1200", "media"),lwd = 3, col = c("red", "green"))
 ```
 
 ## Ejercicio 3
@@ -120,9 +138,9 @@ md=731
 ds=175
 b=700
 a=600
-p=pnorm(b,md,ds)-pnorm(a,md,ds)
-print(p)
+pnorm(b,md,ds)-pnorm(a,md,ds)
 ```
+
   <b>Teniendo una probabilidad aproximada de 20.26%</b>
   
   2. Calcule el porcentaje de tanques cuyo precio es de al menos MX$800.
@@ -130,26 +148,41 @@ print(p)
 md=731
 ds=175
 a=800
-p=1-pnorm(a,md,ds)
-print(p)
+1-pnorm(a,md,ds)
 ```
   <b>Teniendo una probabilidad aproximada de 34.67%</b>
-  
+
   3. Grafique la función de probabilidad (o densidad) utilizada.
   
   <r>Solo es cuestion de utilizar la funcion de plot que se tiene para R, usando de argumento para cada elemento de las abscisas, el precio, y en las ordenadas el resultado de la probabilidad de que la recarga cueste dicho precio</r>
   
   <b> Resultando en la grafica:</b>
-
 ```{r}
+n=40
 md=731
 ds=175
-ran=md-4 # Como la 68% de los datos son entre +-\1sigma,95% para +-2, 99% para +-3\sigma, entonces utilizamos el rango
-x<-seq(md-3*ds,md+3*ds,1)
+#Ejercicio1
+a1=600
+b1=700
+#Ejercicio2
+a2=800
+xmax=md+3*ds # Como la 68% de los datos son entre +-\1sigma,95% para +-2, 99% para +-3\sigma, entonces utilizamos el rango
 
-plot(dnorm(x,md,ds),main = "Funcion de densidad normal",ylab = "P(X = x)", xlab = "Precio",col="blue")
+x<-seq(1,xmax+100,1) 
+
+plot(x,dnorm(x,md,ds),main = "Probabilidad de precios por arrendamiento de tanques de oxigeno",ylab = "Probabilidad", xlab = "Precio(MXM)",col="blue",xlim=c(md-3*ds,md+3*ds),fg = "gray")
+abline(h = 0)
+# Ejercicio 1
+x<-seq(a1,b1,1)
+lines(x,dnorm(x,md,ds),type="h",col="red")
+# Ejercicio 2
+x<-seq(a2,xmax,1)
+lines(x,dnorm(x,md,ds),type="h",col="purple")
+# Media
+lines(md,dnorm(md,md,ds),type="h",col="green",lwd=2)
+# Simbologia
+legend("topright", legend = c(paste0("P(",a1,"<X<",b1,")"),paste0("P(X≥",a2,")"),"media"),lwd = 3, col = c("red","purple","green"))
 ```
-
 ## Ejercicio 4
 
 El primer filtro en un puesto de vacunación contra covid, consiste en preguntar a las personas si han presentado en la última semana alguno de los síntomas asociados a la enfermedad como tos y fiebre. Si alguna persona ha presentado al menos uno de estos síntomas, se le invita a pasar a responder un cuestionario más detallado con profesionales de la salud para decidir si es conveniente vacunarlo o no. Si de registros previos se sabe que el 97% de las personas que acuden a vacunarse no han presentado síntomas en la última semana:
@@ -160,24 +193,24 @@ El primer filtro en un puesto de vacunación contra covid, consiste en preguntar
   
 ```{r}
 n=100
-p=dgeom(n-1,0.03) # Restando 1, ya que en R no se incluye el exito en la X, a diferencia de algunos libros y autores
-print(p)
+p=0.03
+dgeom(n-1,p) # Restando 1, ya que en R no se incluye el exito en la X, a diferencia de algunos libros y autores
 ```
   <b>Teniendo una probabilidad aproximada de 00.15%</b>
 
   2. Calcule la probabilidad de que la 50° persona sea la primera que pasará a responder el cuestionario detallado.
 ```{r}
-n=50 
-p=dgeom(n-1,0.03) # Restando 1, ya que en R no se incluye el exito en la X, a diferencia de algunos libros y autores
-print(p)
+n=50
+p=0.03
+dgeom(n-1,p) # Restando 1, ya que en R no se incluye el exito en la X, a diferencia de algunos libros y autores
 ```
   <b>Teniendo una probabilidad aproximada de 00.67%</b>
 
   3. Calcule la probabilidad de que la primera persona encuestada sea la primera que pasará a responder el cuestionario detallado.
 ```{r}
 n=1
-p=dgeom(n-1,0.03) # Restando 1, ya que en R no se incluye el exito en la X, a diferencia de algunos libros y autores
-print(p)
+p=0.03
+dgeom(n-1,p) # Restando 1, ya que en R no se incluye el exito en la X, a diferencia de algunos libros y autores
 ```
 
   <b>Teniendo una probabilidad aproximada de 3%</b>
@@ -186,36 +219,60 @@ print(p)
   
   <b>Grafica</b>
 ```{r}
-x<-seq(0,150,1)
+n1=100
+n2=50
+n3=1
+p=0.03
+x<-seq(1,max(n1,n2,n3),1)
 
-plot(dgeom(x,0.03),main = "Funcion de densidad normal",ylab = "P(X = x)", xlab = "Precio",col="blue")
+plot(x,dgeom(x-1,p),main = "Funcion de densidad normal",ylab = "P(X = x)", xlab = "Precio",col="blue")
+#Ejercicio 1
+points(n1,dgeom(n1-1,p),col="red",lwd=3)
+#Ejercicio 2
+points(n2,dgeom(n2-1,p),col="purple",lwd=3)
+#Ejercicio 3
+points(n3,dgeom(n3-1,p),col="cyan",lwd=3)
+# Simbologia
+legend("topright", legend = c(paste0("Inciso 1, n = ",n1),paste0("Inciso 2, n = ",n2),paste0("Inciso 3, n = ",n3)),lwd = 3, col = c("red","purple","cyan"))
 ```
+
 ## Ejercicio 5
 
 Durante el proceso de vacunación contra covid, se aplicaron en cierto centro de salud 100 vacunas de la marca Moderna, y 200 de la marca Pfizer. Si de las 300 personas vacunadas se selecciona una muestra de 15, y se les contacta por teléfono para dar seguimiento e investigar las posibles reacciones provocadas por la vacuna:
 
   1. Calcule la probabilidad de que todas personas seleccionadas en la muestra hayan sido vacunadas con la vacuna Moderna.
+  
   <r>El experimento en este caso es saber que vacuna fue aplicada en una persona, siendo el espacio muestra el evento de ser vacunado con Moderna, o el evento de ser vacunados por Pfizer, hablando asi entonces de una variable discreta, y al elegir una muestra $n$ de entre $N(tipo1)+M(tipo2)$ objetos, se puede entender que hablamos de distribucion hipergeometrica, siendo el comando en R para calcular casos especificos "dhyper" y "phyper" para casos de probabilidad acumulada. Teniendo asi entonces</r>
+```{r}
+n=15 # Muestra
+N=100 # Moderna / Tipo 1
+M=200 # Pfizer / Tipo 2
+q1=15 # Cantidad de interes del ejercicio 1
+
+phyper(q1,N,M,n) # Queremos la prob del tipo 1
+```
+
+  <b>Teniendo una probabilidad aproximada de 3%</b>
   
   2. Calcule la probabilidad de que dos o más de las personas de la muestra hayan sido vacunadas con Moderna
 ```{r}
 n=15 # Muestra
 N=100 # Moderna / Tipo 1
 M=200 # Pfizer / Tipo 2
-p=1-phyper(2,N,M,n) # Queremos la prob del tipo 1
-print(p)
+q2=1 # Cantidad de interes del ejercicio 2 (Tomando en cuenta que F(x≥2)=1-F(X<1))
+
+1-phyper(q2,N,M,n) # Queremos restar la prob del tipo 1 de la total
 ```
-  <b>Teniendo una probabilidad aproximada de 92.59%</b>
+  <b>Teniendo una probabilidad aproximada de 98.28%</b>
 
   3. Calcule la probabilidad de que entre 7 y 10 personas hayan sido vacunadas con Pfizer
 ```{r}
 n=15 # Muestra
 N=100 # Moderna / Tipo 1
 M=200 # Pfizer / Tipo 2
-a=7
-b=10
-p=phyper(b,M,N,n)-phyper(a,M,N,n) # Queremos la prob del tipo 2
-print(p)
+q3a=7 # Cantidad inicial de interes del ejercicio 3
+q3b=10 # Cantidad final de interes del ejercicio 3
+phyper(b,M,N,n)-phyper(a,M,N,n) # Queremos la resta de las prob del tipo 2 ( F(a<x<b) = F(b)-F(a) )
 ```
   <b>Teniendo una probabilidad aproximada de 51.68%</b>
 
@@ -224,19 +281,47 @@ print(p)
   <b>Grafica tipoa 1</b>
 ```{r}
 n=15 # Muestra
-x<-seq(0,n,1)
 N=100 # Moderna / Tipo 1
 M=200 # Pfizer / Tipo 2
+x<-seq(0,n,1)
+q1=15 # Cantidad de interes del ejercicio 1
+q2=1 # Cantidad de interes del ejercicio 2 (Tomando en cuenta que F(x≥2)=1-F(X<1))
+q3a=7 # Cantidad inicial de interes del ejercicio 3
+q3b=10 # Cantidad final de interes del ejercicio 3
 
-plot(phyper(x,N,M,n),main = "Personas vacunadas con la vacuna marca Pfzier",ylab = "Probabilidad", xlab = "Personas vacunadas con la vacuna marca Pfzier",col="blue")
+plot(x,dhyper(x,N,M,n),main = "Personas vacunadas con la vacuna marca Pfzier",ylab = "Probabilidad f(q)", xlab = "Personas vacunadas con la vacuna marca Pfzier",col="blue")
+#Ejercicio 1
+points(q1,dhyper(q1,N,M,n),col="red",lwd=3)
+#Ejercicio 2
+points(q2,dhyper(q2,N,M,n),col="purple",lwd=3)
+#Ejercicio 3
+x3<-seq(q3a+1,q3b-1,1)
+points(x3,dhyper(x3,N,M,n),col="cyan",lwd=3)
+# Simbologia
+legend("topright", legend = c(paste0("Inciso 1, q = ",q1),paste0("Inciso 2, q = ",q2),paste0("Inciso 3, ",q3a," > q > ",q3b)),lwd = 3, col = c("red","purple","cyan"))
+
 ```
   
   <b>Grafica tipo 2</b>
 ```{r}
 n=15 # Muestra
-x<-seq(0,n,1)
 N=100 # Moderna / Tipo 1
 M=200 # Pfizer / Tipo 2
+x<-seq(0,n,1)
+q1=15 # Cantidad de interes del ejercicio 1
+q2=1 # Cantidad de interes del ejercicio 2 (Tomando en cuenta que F(x≥2)=1-F(X<1))
+q3a=7 # Cantidad inicial de interes del ejercicio 3
+q3b=10 # Cantidad final de interes del ejercicio 3
 
-plot(phyper(x,M,N,n),main = "Pfzier",ylab = "P(X = x)", xlab = "Personas vacunadas con la vacuna marca Pfzier",col="blue")
+plot(x,dhyper(x,M,N,n),main = "Personas vacunadas con la vacuna marca Moderna",ylab = "Probabilidad f(q)", xlab = "Personas vacunadas con la vacuna marca Pfzier",col="blue")
+#Ejercicio 1
+points(q1,dhyper(q1,M,N,n),col="red",lwd=3)
+#Ejercicio 2
+points(q2,dhyper(q2,M,N,n),col="purple",lwd=3)
+#Ejercicio 3
+x3<-seq(q3a+1,q3b-1,1)
+points(x3,dhyper(x3,M,N,n),col="cyan",lwd=3)
+# Simbologia
+legend("topleft", legend = c(paste0("Inciso 1, q = ",q1),paste0("Inciso 2, q = ",q2),paste0("Inciso 3, ",q3a," > q > ",q3b)),lwd = 3, col = c("red","purple","cyan"))
+
 ```
