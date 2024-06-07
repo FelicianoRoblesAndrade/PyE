@@ -311,11 +311,12 @@ q3b=10 # Cantidad final de interes del ejercicio 3
 
 plot(x,dhyper(x,N,M,n),main = "Personas vacunadas con la vacuna marca Moderna",ylab = "Probabilidad f(q)", xlab = "Personas vacunadas con la vacuna marca Moderna",col="blue")
 #Ejercicio 1
-points(q1,dhyper(q1,N,M,n),col="red",lwd=3)
+points(q1,dhyper(q1,N,M,n),col="red",lwd=5)
 #Ejercicio 2
-points(q2,dhyper(q2,N,M,n),col="purple",lwd=3)
+x<-seq(2,15,1)
+points(x,dhyper(x,N,M,n),col="purple",lwd=3)
 # Simbologia
-legend("topright", legend = c(paste0("Evento 1, q = ",q1),paste0("Evento 2, q = ",q2)),lwd = 3, col = c("red","purple"))
+legend("topright", legend = c(paste0("Evento 1, q = ",q1),paste0("Evento 2, q ≥ ",q2+1)),lwd = 3, col = c("red","purple"))
 
 ```
   
