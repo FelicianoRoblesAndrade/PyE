@@ -1,0 +1,727 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\section{Tarea 1 - Probabilidad y
+Estadística}\label{tarea-1---probabilidad-y-estaduxedstica}
+
+\subsection{OBJETIVO}\label{objetivo}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Identificar variables aleatorias comunes y sus distribuciones en
+  contextos dados
+\item
+  Aplicar propiedades de la probabilidad para resolver problemas
+\item
+  Identificar comandos de R para el cálculo de probabilidades
+\item
+  Analizar la forma de las funciones de probabilidad (o densidad) de
+  variables aleatorias comunes
+\item
+  Crear archivos RMarkdown
+\end{enumerate}
+
+\subsection{INSTRUCCIONES}\label{instrucciones}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Identifique la variable aleatoria y distribución que resuelve cada uno
+  de los problemas planteados
+\item
+  Resuelva los ejercicios utilizando R
+\item
+  Escriba sus respuestas en un archivo R Markdown
+\item
+  Envíe en html sus respuestas al apartado correspondiente en el grupo
+  de Teams
+\end{enumerate}
+
+\subsection{Ejercicio 1}\label{ejercicio-1}
+
+Se convocaron a estudiantes de enfermería y al público en general para
+registrarse y apoyar como voluntario en los puestos de vacunación contra
+covid. Si 7 de cada 10 voluntarios son estudiantes de enfermería:
+
+En este caso la variable aleatoria seria si la persona voluntariada es
+un estudiante de enfermeria o alguien del público en general (v.a.
+d.c.:Bernoulli).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Calcule la probabilidad de que se necesiten 40 voluntarios registrados
+  para completar 20 estudiantes de enfermería.
+\end{enumerate}
+
+El espacio muestral en este caso nomas es de 2, o el voluntario es
+estudiante de enfermeria o no lo es, y esto se repite la cantidad de
+veces que se realizara el experimento (en este caso, 40 veces), podiendo
+concluir que se tiene una variable de la forma binomial, cuya funcion de
+probabilidad acumuladad tiene la forma:
+\[f(i) \;=\; P(X=x)  \;=\; {n\choose x} p^x\, (1-p)^{n-x}, \qquad x=0,1,2, \ldots, n\]
+donde \(X\)= Número total de exitos \(x=\) exitos \(n=\) tamaño muestral
+\(p=\) probabilidad de éxito
+
+pero como estamos manejando R, solo basta con utilizar el comando para
+variables aleatorias binomiales: ``dbinom(x,size=n,prob=p)'', entonces,
+calculando rapidamente la probabilidad de éxito:
+\[p=\frac{x}{n}=\frac{7}{10}=0.7\] reemplazando en la funcion de
+probabilidad binomial de R, tenemos que:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}\OtherTok{=}\DecValTok{20}
+\NormalTok{n}\OtherTok{=}\DecValTok{40}
+\NormalTok{p}\OtherTok{=}\FloatTok{0.7}
+\FunctionTok{dbinom}\NormalTok{(x,n,p) }\CommentTok{\# exitos, ensayos de Bernoulli, probabilidad de exito}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.003835144
+\end{verbatim}
+
+Teniendo una probabilidad aproximada de 0.38\%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Calcule la probabilidad de que se necesiten 30 voluntarios registrados
+  para completar 20 estudiantes de enfermería.
+\end{enumerate}
+
+Mismo procedimiento que el numero anterior, nomas cambiando el tamaño
+muestral \(n=30\), teniendo asi:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}\OtherTok{=}\DecValTok{20}
+\NormalTok{n}\OtherTok{=}\DecValTok{30}
+\NormalTok{p}\OtherTok{=}\FloatTok{0.7}
+\FunctionTok{dbinom}\NormalTok{(x,n,p) }\CommentTok{\# exitos, ensayos de Bernoulli, probabilidad de exito}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1415617
+\end{verbatim}
+
+Teniendo una probabilidad aproximada de 14.16\%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Grafique la función de probabilidad (o densidad) utilizada
+\end{enumerate}
+
+Solo es cuestion de utilizar la funcion de plot que se tiene para R,
+usando de argumento para cada elemento de las abscisas, la cantidad de
+exitos, y en las ordenadas el resultado de la probabilidad de exito que
+se tiene dicha cantidad
+
+Resultando en la grafica:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}\OtherTok{=}\DecValTok{20}
+\NormalTok{n1}\OtherTok{=}\DecValTok{40}
+\NormalTok{n2}\OtherTok{=}\DecValTok{30}
+\NormalTok{n}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{max}\NormalTok{(n1,n2),}\DecValTok{1}\NormalTok{)}
+\NormalTok{p}\OtherTok{=}\FloatTok{0.7}
+
+\FunctionTok{plot}\NormalTok{(n,}\FunctionTok{dbinom}\NormalTok{(x,n,p),}\AttributeTok{main =} \StringTok{"Función de probabilidad binomial"}\NormalTok{,}\AttributeTok{ylab =} \StringTok{"P(X = x)"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Número de éxitos"}\NormalTok{,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{) }
+\FunctionTok{points}\NormalTok{(n1,}\FunctionTok{dbinom}\NormalTok{(x,n1,p),}\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(n2,}\FunctionTok{dbinom}\NormalTok{(x,n2,p),}\AttributeTok{col=}\StringTok{"green"}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"n="}\NormalTok{,n1),}\FunctionTok{paste0}\NormalTok{(}\StringTok{"n="}\NormalTok{,n2)),}\AttributeTok{lwd =} \DecValTok{3}\NormalTok{, }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tarea-mod-PyE_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\subsection{Ejercicio 2}\label{ejercicio-2}
+
+Los precios nacionales por arrendamiento de tanques con oxígeno
+medicinal con capacidad para 10,000 litros de oxígeno, tan demandados
+durante la contingencia sanitaria por covid, tienen una media de
+MX\$1177 y una desviación estándar de MX\$972. Si se elige una muestra
+de 40 tanques:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Aproxime la probabilidad de que la media muestral de sus precios se
+  encuentre entre MX\$1000 y MX\$1200 pesos.
+\end{enumerate}
+
+Nuestro experimento es consultar el precio del tanque de oxigeno, la
+variable aleatoria continua es el precio(ya que puede tomar valores
+entre dos numeros cualquiera), el espacio muestral y eventos serian
+todos los precios posibles, con una desviacion estandar de
+\(\sigma=972\) y una media de \(\mu=1177\), por lo que se utiliza la
+funcion de densidad para el caso normal, con dichos datos, asi como el
+hecho que, \(f(x)\) para \(a\leq x\leq b\), se calcula como
+\(f(b)-f(a)\), o bien, en derminos de Rstudio,
+\(dnorm(xf,ds,\mu)-dnorm(xi,ds,\mu)\) donde
+\(ds=\frac{\sigma}{\sqrt{n}}\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{=}\DecValTok{40}
+\NormalTok{md}\OtherTok{=}\DecValTok{1177}
+\NormalTok{ds}\OtherTok{=}\DecValTok{972}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n)}
+\NormalTok{b}\OtherTok{=}\DecValTok{1200}
+\NormalTok{a}\OtherTok{=}\DecValTok{1000}
+\NormalTok{p}\OtherTok{=}\FunctionTok{pnorm}\NormalTok{(b,md,ds)}\SpecialCharTok{{-}}\FunctionTok{pnorm}\NormalTok{(a,md,ds)}
+\FunctionTok{print}\NormalTok{(p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4347582
+\end{verbatim}
+
+Teniendo una probabilidad aproximada de 43.48\%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Grafique la función de probabilidad (o densidad) utilizada.
+\end{enumerate}
+
+Solo es cuestion de utilizar la funcion de plot que se tiene para R,
+usando de argumento para cada elemento de las abscisas, el precio, y en
+las ordenadas el resultado de la probabilidad de que ese precio sea lo
+que cueste el tanque de oxigeno
+
+Resultando en la grafica:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{=}\DecValTok{40}
+\NormalTok{md}\OtherTok{=}\DecValTok{1177}
+\NormalTok{ds}\OtherTok{=}\DecValTok{972}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n)}
+\NormalTok{ran}\OtherTok{=}\NormalTok{md}\DecValTok{{-}4} \CommentTok{\# Como la 68\% de los datos son entre +{-}\textbackslash{}1sigma,95\% para +{-}2, 99\% para +{-}3\textbackslash{}sigma, entonces utilizamos el rango}
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2000}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(x,}\FunctionTok{dnorm}\NormalTok{(x,md,ds),}\AttributeTok{main =} \StringTok{"Probabilidad de precios por arrendamiento de tanques de oxigeno"}\NormalTok{,}\AttributeTok{ylab =} \StringTok{"Probabilidad"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Precio(MXM)"}\NormalTok{,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{xlim=}\FunctionTok{c}\NormalTok{(md}\DecValTok{{-}3}\SpecialCharTok{*}\NormalTok{ds,md}\SpecialCharTok{+}\DecValTok{3}\SpecialCharTok{*}\NormalTok{ds),}\AttributeTok{fg =} \StringTok{"gray"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{)}
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{1200}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(x,}\FunctionTok{dnorm}\NormalTok{(x,md,ds),}\AttributeTok{type=}\StringTok{"h"}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(md,}\FunctionTok{dnorm}\NormalTok{(md,md,ds),}\AttributeTok{type=}\StringTok{"h"}\NormalTok{,}\AttributeTok{col=}\StringTok{"green"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"p(x),1000\textless{}x\textless{}1200"}\NormalTok{, }\StringTok{"media"}\NormalTok{),}\AttributeTok{lwd =} \DecValTok{3}\NormalTok{, }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tarea-mod-PyE_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\subsection{Ejercicio 3}\label{ejercicio-3}
+
+Ante la demanda ocasionada por la pandemia de covid, se realizó una
+investigación de los precios por recargas de oxígeno medicinal en
+cilindros con capacidad para 10,000 litros de oxígeno. Si el precio
+ofrecido por los proveedores nacionales sigue una distribución normal
+con media de MX\$731 y desviación estándar de MX\$175:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Calcule el porcentaje de tanques cuyo precio oscila entre MX\$600 y
+  MX\$700.
+\end{enumerate}
+
+Nuestro experimento es consultar el precio de recargas de oxígeno
+medicinal en cilindros, la variable aleatoria continua es el precio(ya
+que puede tomar valores entre dos numeros cualquiera), el espacio
+muestral y eventos serian todos los precios posibles, con una desviacion
+estandar de \(\sigma=175\) y una media de \(\mu=731\), por lo que se
+utiliza la funcion de densidad para el caso normal, con dichos datos,
+asi como el hecho que, para \(f(x)\) para \(a\leq x\leq b\), se calcula
+como \(f(b)-f(a)\), o bien, en derminos de Rstudio,
+\(dnorm(b,ds,\mu)-dnorm(a,ds,\mu)\) donde \(ds=\sigma\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{md}\OtherTok{=}\DecValTok{731}
+\NormalTok{ds}\OtherTok{=}\DecValTok{175}
+\NormalTok{b}\OtherTok{=}\DecValTok{700}
+\NormalTok{a}\OtherTok{=}\DecValTok{600}
+\FunctionTok{pnorm}\NormalTok{(b,md,ds)}\SpecialCharTok{{-}}\FunctionTok{pnorm}\NormalTok{(a,md,ds)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2026403
+\end{verbatim}
+
+Teniendo una probabilidad aproximada de 20.26\%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Calcule el porcentaje de tanques cuyo precio es de al menos MX\$800.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{md}\OtherTok{=}\DecValTok{731}
+\NormalTok{ds}\OtherTok{=}\DecValTok{175}
+\NormalTok{a}\OtherTok{=}\DecValTok{800}
+\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{pnorm}\NormalTok{(a,md,ds)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3466851
+\end{verbatim}
+
+Teniendo una probabilidad aproximada de 34.67\%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Grafique la función de probabilidad (o densidad) utilizada.
+\end{enumerate}
+
+Solo es cuestion de utilizar la funcion de plot que se tiene para R,
+usando de argumento para cada elemento de las abscisas, el precio, y en
+las ordenadas el resultado de la probabilidad de que la recarga cueste
+dicho precio
+
+Resultando en la grafica:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{=}\DecValTok{40}
+\NormalTok{md}\OtherTok{=}\DecValTok{731}
+\NormalTok{ds}\OtherTok{=}\DecValTok{175}
+\CommentTok{\#Ejercicio1}
+\NormalTok{a1}\OtherTok{=}\DecValTok{600}
+\NormalTok{b1}\OtherTok{=}\DecValTok{700}
+\CommentTok{\#Ejercicio2}
+\NormalTok{a2}\OtherTok{=}\DecValTok{800}
+\NormalTok{xmax}\OtherTok{=}\NormalTok{md}\SpecialCharTok{+}\DecValTok{3}\SpecialCharTok{*}\NormalTok{ds }\CommentTok{\# Como la 68\% de los datos son entre +{-}\textbackslash{}1sigma,95\% para +{-}2, 99\% para +{-}3\textbackslash{}sigma, entonces utilizamos el rango}
+
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,xmax}\SpecialCharTok{+}\DecValTok{100}\NormalTok{,}\DecValTok{1}\NormalTok{) }
+
+\FunctionTok{plot}\NormalTok{(x,}\FunctionTok{dnorm}\NormalTok{(x,md,ds),}\AttributeTok{main =} \StringTok{"Probabilidad de precios por arrendamiento de tanques de oxigeno"}\NormalTok{,}\AttributeTok{ylab =} \StringTok{"Probabilidad"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Precio(MXM)"}\NormalTok{,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{xlim=}\FunctionTok{c}\NormalTok{(md}\DecValTok{{-}3}\SpecialCharTok{*}\NormalTok{ds,md}\SpecialCharTok{+}\DecValTok{3}\SpecialCharTok{*}\NormalTok{ds),}\AttributeTok{fg =} \StringTok{"gray"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{)}
+\CommentTok{\# Ejercicio 1}
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(a1,b1,}\DecValTok{1}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(x,}\FunctionTok{dnorm}\NormalTok{(x,md,ds),}\AttributeTok{type=}\StringTok{"h"}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\CommentTok{\# Ejercicio 2}
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(a2,xmax,}\DecValTok{1}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(x,}\FunctionTok{dnorm}\NormalTok{(x,md,ds),}\AttributeTok{type=}\StringTok{"h"}\NormalTok{,}\AttributeTok{col=}\StringTok{"purple"}\NormalTok{)}
+\CommentTok{\# Media}
+\FunctionTok{lines}\NormalTok{(md,}\FunctionTok{dnorm}\NormalTok{(md,md,ds),}\AttributeTok{type=}\StringTok{"h"}\NormalTok{,}\AttributeTok{col=}\StringTok{"green"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
+\CommentTok{\# Simbologia}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"P("}\NormalTok{,a1,}\StringTok{"\textless{}X\textless{}"}\NormalTok{,b1,}\StringTok{")"}\NormalTok{),}\FunctionTok{paste0}\NormalTok{(}\StringTok{"P(X≥"}\NormalTok{,a2,}\StringTok{")"}\NormalTok{),}\StringTok{"media"}\NormalTok{),}\AttributeTok{lwd =} \DecValTok{3}\NormalTok{, }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"purple"}\NormalTok{,}\StringTok{"green"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tarea-mod-PyE_files/figure-latex/unnamed-chunk-8-1.pdf}
+\#\# Ejercicio 4
+
+El primer filtro en un puesto de vacunación contra covid, consiste en
+preguntar a las personas si han presentado en la última semana alguno de
+los síntomas asociados a la enfermedad como tos y fiebre. Si alguna
+persona ha presentado al menos uno de estos síntomas, se le invita a
+pasar a responder un cuestionario más detallado con profesionales de la
+salud para decidir si es conveniente vacunarlo o no. Si de registros
+previos se sabe que el 97\% de las personas que acuden a vacunarse no
+han presentado síntomas en la última semana:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Calcule la probabilidad de que se necesiten encuestar a 100 personas
+  para encontrar a la primera que pasará a responder el cuestionario
+  detallado.
+\end{enumerate}
+
+El experimento en este caso es si la persona muestra sintomas, y por
+ende, pasa a contestar un cuestionario detallado, siendo el espacio
+muestra solamente el evento de presentar sintomas, o el evento de no
+presentarlos, hablando asi entonces de una variable discreta de
+Bernoulli, y como se calcula la cantidad de fallos necesarios para un
+exito, se puede entender que hablamos de distribucion geometrica, por lo
+que podemos usar la funcion de probabilidad geometrica, siendo el
+comando en R para calcular casos especificos ``dgeom'' y ``pgeom'' para
+casos de probabilidad acumulada. Teniendo asi entonces
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{=}\DecValTok{100}
+\NormalTok{p}\OtherTok{=}\FloatTok{0.03}
+\FunctionTok{dgeom}\NormalTok{(n}\DecValTok{{-}1}\NormalTok{,p) }\CommentTok{\# Restando 1, ya que en R no se incluye el exito en la X, a diferencia de algunos libros y autores}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.001470696
+\end{verbatim}
+
+Teniendo una probabilidad aproximada de 00.15\%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Calcule la probabilidad de que la 50° persona sea la primera que
+  pasará a responder el cuestionario detallado.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{=}\DecValTok{50}
+\NormalTok{p}\OtherTok{=}\FloatTok{0.03}
+\FunctionTok{dgeom}\NormalTok{(n}\DecValTok{{-}1}\NormalTok{,p) }\CommentTok{\# Restando 1, ya que en R no se incluye el exito en la X, a diferencia de algunos libros y autores}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.00674429
+\end{verbatim}
+
+Teniendo una probabilidad aproximada de 00.67\%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Calcule la probabilidad de que la primera persona encuestada sea la
+  primera que pasará a responder el cuestionario detallado.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{=}\DecValTok{1}
+\NormalTok{p}\OtherTok{=}\FloatTok{0.03}
+\FunctionTok{dgeom}\NormalTok{(n}\DecValTok{{-}1}\NormalTok{,p) }\CommentTok{\# Restando 1, ya que en R no se incluye el exito en la X, a diferencia de algunos libros y autores}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.03
+\end{verbatim}
+
+Teniendo una probabilidad aproximada de 3\%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Grafique la función de probabilidad (o densidad) utilizada.
+\end{enumerate}
+
+Grafica
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n1}\OtherTok{=}\DecValTok{100}
+\NormalTok{n2}\OtherTok{=}\DecValTok{50}
+\NormalTok{n3}\OtherTok{=}\DecValTok{1}
+\NormalTok{p}\OtherTok{=}\FloatTok{0.03}
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\FunctionTok{max}\NormalTok{(n1,n2,n3),}\DecValTok{1}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(x,}\FunctionTok{dgeom}\NormalTok{(x}\DecValTok{{-}1}\NormalTok{,p),}\AttributeTok{main =} \StringTok{"Funcion de densidad normal"}\NormalTok{,}\AttributeTok{ylab =} \StringTok{"P(X = x)"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Precio"}\NormalTok{,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\CommentTok{\#Ejercicio 1}
+\FunctionTok{points}\NormalTok{(n1,}\FunctionTok{dgeom}\NormalTok{(n1}\DecValTok{{-}1}\NormalTok{,p),}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{)}
+\CommentTok{\#Ejercicio 2}
+\FunctionTok{points}\NormalTok{(n2,}\FunctionTok{dgeom}\NormalTok{(n2}\DecValTok{{-}1}\NormalTok{,p),}\AttributeTok{col=}\StringTok{"purple"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{)}
+\CommentTok{\#Ejercicio 3}
+\FunctionTok{points}\NormalTok{(n3,}\FunctionTok{dgeom}\NormalTok{(n3}\DecValTok{{-}1}\NormalTok{,p),}\AttributeTok{col=}\StringTok{"cyan"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{)}
+\CommentTok{\# Simbologia}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Inciso 1, n = "}\NormalTok{,n1),}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Inciso 2, n = "}\NormalTok{,n2),}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Inciso 3, n = "}\NormalTok{,n3)),}\AttributeTok{lwd =} \DecValTok{3}\NormalTok{, }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"purple"}\NormalTok{,}\StringTok{"cyan"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tarea-mod-PyE_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\subsection{Ejercicio 5}\label{ejercicio-5}
+
+Durante el proceso de vacunación contra covid, se aplicaron en cierto
+centro de salud 100 vacunas de la marca Moderna, y 200 de la marca
+Pfizer. Si de las 300 personas vacunadas se selecciona una muestra de
+15, y se les contacta por teléfono para dar seguimiento e investigar las
+posibles reacciones provocadas por la vacuna:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Calcule la probabilidad de que todas personas seleccionadas en la
+  muestra hayan sido vacunadas con la vacuna Moderna.
+\end{enumerate}
+
+El experimento en este caso es saber que vacuna fue aplicada en una
+persona, siendo el espacio muestra el evento de ser vacunado con
+Moderna, o el evento de ser vacunados por Pfizer, hablando asi entonces
+de una variable discreta, y al elegir una muestra \(n\) de entre
+\(N(tipo1)+M(tipo2)\) objetos, se puede entender que hablamos de
+distribucion hipergeometrica, siendo el comando en R para calcular casos
+especificos ``dhyper'' y ``phyper'' para casos de probabilidad
+acumulada. Teniendo asi entonces
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{=}\DecValTok{15} \CommentTok{\# Muestra}
+\NormalTok{N}\OtherTok{=}\DecValTok{100} \CommentTok{\# Moderna / Tipo 1}
+\NormalTok{M}\OtherTok{=}\DecValTok{200} \CommentTok{\# Pfizer / Tipo 2}
+\NormalTok{q1}\OtherTok{=}\DecValTok{15} \CommentTok{\# Cantidad de interes del ejercicio 1}
+
+\FunctionTok{phyper}\NormalTok{(q1,N,M,n) }\CommentTok{\# Queremos la prob del tipo 1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+Teniendo una probabilidad aproximada de 3\%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Calcule la probabilidad de que dos o más de las personas de la muestra
+  hayan sido vacunadas con Moderna
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{=}\DecValTok{15} \CommentTok{\# Muestra}
+\NormalTok{N}\OtherTok{=}\DecValTok{100} \CommentTok{\# Moderna / Tipo 1}
+\NormalTok{M}\OtherTok{=}\DecValTok{200} \CommentTok{\# Pfizer / Tipo 2}
+\NormalTok{q2}\OtherTok{=}\DecValTok{1} \CommentTok{\# Cantidad de interes del ejercicio 2 (Tomando en cuenta que F(x≥2)=1{-}F(X\textless{}1))}
+
+\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{phyper}\NormalTok{(q2,N,M,n) }\CommentTok{\# Queremos restar la prob del tipo 1 de la total}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9827509
+\end{verbatim}
+
+Teniendo una probabilidad aproximada de 98.28\%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Calcule la probabilidad de que entre 7 y 10 personas hayan sido
+  vacunadas con Pfizer
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{=}\DecValTok{15} \CommentTok{\# Muestra}
+\NormalTok{N}\OtherTok{=}\DecValTok{100} \CommentTok{\# Moderna / Tipo 1}
+\NormalTok{M}\OtherTok{=}\DecValTok{200} \CommentTok{\# Pfizer / Tipo 2}
+\NormalTok{q3a}\OtherTok{=}\DecValTok{7} \CommentTok{\# Cantidad inicial de interes del ejercicio 3}
+\NormalTok{q3b}\OtherTok{=}\DecValTok{10} \CommentTok{\# Cantidad final de interes del ejercicio 3}
+\FunctionTok{phyper}\NormalTok{(b,M,N,n)}\SpecialCharTok{{-}}\FunctionTok{phyper}\NormalTok{(a,M,N,n) }\CommentTok{\# Queremos la resta de las prob del tipo 2 ( F(a\textless{}x\textless{}b) = F(b){-}F(a) )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+Teniendo una probabilidad aproximada de 51.68\%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Grafique la función de probabilidad (o densidad) utilizada.
+\end{enumerate}
+
+Grafica tipoa 1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{=}\DecValTok{15} \CommentTok{\# Muestra}
+\NormalTok{N}\OtherTok{=}\DecValTok{100} \CommentTok{\# Moderna / Tipo 1}
+\NormalTok{M}\OtherTok{=}\DecValTok{200} \CommentTok{\# Pfizer / Tipo 2}
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,n,}\DecValTok{1}\NormalTok{)}
+\NormalTok{q1}\OtherTok{=}\DecValTok{15} \CommentTok{\# Cantidad de interes del ejercicio 1}
+\NormalTok{q2}\OtherTok{=}\DecValTok{1} \CommentTok{\# Cantidad de interes del ejercicio 2 (Tomando en cuenta que F(x≥2)=1{-}F(X\textless{}1))}
+\NormalTok{q3a}\OtherTok{=}\DecValTok{7} \CommentTok{\# Cantidad inicial de interes del ejercicio 3}
+\NormalTok{q3b}\OtherTok{=}\DecValTok{10} \CommentTok{\# Cantidad final de interes del ejercicio 3}
+
+\FunctionTok{plot}\NormalTok{(x,}\FunctionTok{dhyper}\NormalTok{(x,N,M,n),}\AttributeTok{main =} \StringTok{"Personas vacunadas con la vacuna marca Pfzier"}\NormalTok{,}\AttributeTok{ylab =} \StringTok{"Probabilidad f(q)"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Personas vacunadas con la vacuna marca Pfzier"}\NormalTok{,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\CommentTok{\#Ejercicio 1}
+\FunctionTok{points}\NormalTok{(q1,}\FunctionTok{dhyper}\NormalTok{(q1,N,M,n),}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{)}
+\CommentTok{\#Ejercicio 2}
+\FunctionTok{points}\NormalTok{(q2,}\FunctionTok{dhyper}\NormalTok{(q2,N,M,n),}\AttributeTok{col=}\StringTok{"purple"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{)}
+\CommentTok{\#Ejercicio 3}
+\NormalTok{x3}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(q3a}\SpecialCharTok{+}\DecValTok{1}\NormalTok{,q3b}\DecValTok{{-}1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(x3,}\FunctionTok{dhyper}\NormalTok{(x3,N,M,n),}\AttributeTok{col=}\StringTok{"cyan"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{)}
+\CommentTok{\# Simbologia}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Inciso 1, q = "}\NormalTok{,q1),}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Inciso 2, q = "}\NormalTok{,q2),}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Inciso 3, "}\NormalTok{,q3a,}\StringTok{" \textgreater{} q \textgreater{} "}\NormalTok{,q3b)),}\AttributeTok{lwd =} \DecValTok{3}\NormalTok{, }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"purple"}\NormalTok{,}\StringTok{"cyan"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tarea-mod-PyE_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+Grafica tipo 2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{=}\DecValTok{15} \CommentTok{\# Muestra}
+\NormalTok{N}\OtherTok{=}\DecValTok{100} \CommentTok{\# Moderna / Tipo 1}
+\NormalTok{M}\OtherTok{=}\DecValTok{200} \CommentTok{\# Pfizer / Tipo 2}
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,n,}\DecValTok{1}\NormalTok{)}
+\NormalTok{q1}\OtherTok{=}\DecValTok{15} \CommentTok{\# Cantidad de interes del ejercicio 1}
+\NormalTok{q2}\OtherTok{=}\DecValTok{1} \CommentTok{\# Cantidad de interes del ejercicio 2 (Tomando en cuenta que F(x≥2)=1{-}F(X\textless{}1))}
+\NormalTok{q3a}\OtherTok{=}\DecValTok{7} \CommentTok{\# Cantidad inicial de interes del ejercicio 3}
+\NormalTok{q3b}\OtherTok{=}\DecValTok{10} \CommentTok{\# Cantidad final de interes del ejercicio 3}
+
+\FunctionTok{plot}\NormalTok{(x,}\FunctionTok{dhyper}\NormalTok{(x,M,N,n),}\AttributeTok{main =} \StringTok{"Personas vacunadas con la vacuna marca Moderna"}\NormalTok{,}\AttributeTok{ylab =} \StringTok{"Probabilidad f(q)"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Personas vacunadas con la vacuna marca Pfzier"}\NormalTok{,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\CommentTok{\#Ejercicio 1}
+\FunctionTok{points}\NormalTok{(q1,}\FunctionTok{dhyper}\NormalTok{(q1,M,N,n),}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{)}
+\CommentTok{\#Ejercicio 2}
+\FunctionTok{points}\NormalTok{(q2,}\FunctionTok{dhyper}\NormalTok{(q2,M,N,n),}\AttributeTok{col=}\StringTok{"purple"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{)}
+\CommentTok{\#Ejercicio 3}
+\NormalTok{x3}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(q3a}\SpecialCharTok{+}\DecValTok{1}\NormalTok{,q3b}\DecValTok{{-}1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(x3,}\FunctionTok{dhyper}\NormalTok{(x3,M,N,n),}\AttributeTok{col=}\StringTok{"cyan"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{)}
+\CommentTok{\# Simbologia}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Inciso 1, q = "}\NormalTok{,q1),}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Inciso 2, q = "}\NormalTok{,q2),}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Inciso 3, "}\NormalTok{,q3a,}\StringTok{" \textgreater{} q \textgreater{} "}\NormalTok{,q3b)),}\AttributeTok{lwd =} \DecValTok{3}\NormalTok{, }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"purple"}\NormalTok{,}\StringTok{"cyan"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tarea-mod-PyE_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\end{document}

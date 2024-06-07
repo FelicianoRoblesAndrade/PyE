@@ -35,20 +35,14 @@ Se convocaron a estudiantes de enfermería y al público en general para registr
 
   1. Calcule la probabilidad de que se necesiten 40 voluntarios registrados para completar 20 estudiantes de enfermería.
   
-  <r>El espacio muestral en este caso nomas es de 2, o el voluntario es estudiante de enfermeria o no lo es, y esto
-  se repite la cantidad de veces que se realizara el experimento (en este caso, 40 veces), podiendo concluir que se tiene una variable
-  de la forma binomial, cuya funcion de probabilidad acumuladad tiene la forma: 
-  $$f(i) \;=\; P(X=x)  \;=\; {n\choose x} p^x\, (1-p)^{n-x}, \qquad x=0,1,2, \ldots, n$$
-  donde $X$= Número total de exitos  $x=$ exitos  $n=$ tamaño muestral  $p=$ probabilidad de éxito
+  <r>Experimento: registro de voluntariado. Espacio muestral: {estudiante de enfermeria(exito/1), publico general(fracaso/0)}. Probabilidad de exito: 7/10. Variable aleatoria: discreta comun binomial. Comando en R para su funcion de probabilidad: "dbinom(x,n,p)" donde x=cantidad de exitos, n=ensayos de Bernoulli, p=probabilidad de exito.
   
-  pero como estamos manejando R, solo basta con utilizar el comando para variables aleatorias binomiales: "dbinom(x,size=n,prob=p)", entonces, calculando rapidamente la probabilidad de éxito:
-  $$p=\frac{x}{n}=\frac{7}{10}=0.7$$
-  reemplazando en la funcion de probabilidad binomial de R, tenemos que:
+  Evento 1: 40 voluntarios(ensayos) para 20 estudiantes(exitos).
 ```{r}
 x=20
 n=40
-p=0.7
-dbinom(x,n,p) # exitos, ensayos de Bernoulli, probabilidad de exito
+p=7/10
+dbinom(x,n,p)
 ```
   
   </r>
@@ -57,12 +51,12 @@ dbinom(x,n,p) # exitos, ensayos de Bernoulli, probabilidad de exito
   
   2. Calcule la probabilidad de que se necesiten 30 voluntarios registrados para completar 20 estudiantes de enfermería.
   
-  <r> Mismo procedimiento que el numero anterior, nomas cambiando el tamaño muestral $n=30$, teniendo asi:
+  Evento 2: 30 voluntarios(ensayos) para 20 estudiantes(exitos).
 ```{r}
 x=20
 n=30
-p=0.7
-dbinom(x,n,p) # exitos, ensayos de Bernoulli, probabilidad de exito
+p=7/10
+dbinom(x,n,p)
 ```
   </r>
   
@@ -70,21 +64,21 @@ dbinom(x,n,p) # exitos, ensayos de Bernoulli, probabilidad de exito
 
   3. Grafique la función de probabilidad (o densidad) utilizada
   
-  <r>Solo es cuestion de utilizar la funcion de plot que se tiene para R, usando de argumento para cada elemento de las abscisas, la cantidad de exitos, y en las ordenadas el resultado de la probabilidad de exito que se tiene dicha cantidad</r>
+  <r>Solo es cuestion de utilizar la funcion de plot que se tiene para R, usando de argumento para cada elemento de las abscisas, la cantidad de Voluntariados, y en las ordenadas el resultado de la probabilidad de exito que se 20 exitos(X)</r>
   
   <b> Resultando en la grafica:</b>
   
 ```{r}
 x=20
-n1=40
-n2=30
+n1=40 # n del evento 1 (Voluntariados)
+n2=30 # n del evento 2 (Voluntariados)
 n<-seq(0,max(n1,n2),1)
 p=0.7
 
-plot(n,dbinom(x,n,p),main = "Función de probabilidad binomial",ylab = "P(X = x)", xlab = "Número de éxitos",col="blue") 
+plot(n,dbinom(x,n,p),main = "Funcion de probabilidad binomial",ylab = "P(X=20)", xlab = "Voluntariados",col="blue") 
 points(n1,dbinom(x,n1,p),col="red")
 points(n2,dbinom(x,n2,p),col="green")
-legend("topright", legend = c(paste0("n=",n1),paste0("n=",n2)),lwd = 3, col = c("red", "green"))
+legend("topleft", legend = c(paste0("Voluntariados=",n1),paste0("Voluntariados=",n2)),lwd = 3, col = c("red", "green"))
 ```
 
 
@@ -94,21 +88,23 @@ Los precios nacionales por arrendamiento de tanques con oxígeno medicinal con c
 
   1. Aproxime la probabilidad de que la media muestral de sus precios se encuentre entre MX$1000 y MX$1200 pesos.
   
-  <r>Nuestro experimento es consultar el precio del tanque de oxigeno, la variable aleatoria continua es el precio(ya que puede tomar valores entre dos numeros cualquiera), el espacio muestral y eventos serian todos los precios posibles, con una desviacion estandar de $\sigma=972$ y una media de $\mu=1177$, por lo que se utiliza la funcion de densidad para el caso normal, con dichos datos, asi como el hecho que, $f(x)$ para $a\leq x\leq b$, se calcula como $f(b)-f(a)$, o bien, en derminos de Rstudio, $dnorm(xf,ds,\mu)-dnorm(xi,ds,\mu)$ donde $ds=\frac{\sigma}{\sqrt{n}}$</r>
+  <r>Experimento: consultar el precio del tanque de oxigeno. Espacio muestral: {Numeros positivos}. Variable aleatoria: continua comun normal. $ds=\frac{\sigma}{\sqrt{n}}=\frac{972}{\sqrt{40}},$ $\mu=1177$. Comando en R para su funcion de probabilidad: "dnorm(x,ds,md)" donde x=media muestral, ds=desviacion estandar, md=media.
+  
+  Evento 1: Valor entre 1200 y 1000.</r>
 ```{r}
 n=40
 md=1177
 ds=972/sqrt(n)
 b=1200
 a=1000
-p=pnorm(b,md,ds)-pnorm(a,md,ds)
+p=pnorm(b,md,ds)-pnorm(a,md,ds) #F(a<=x<=b)=F(b)-F(a)
 print(p)
 ```
   <b>Teniendo una probabilidad aproximada de 43.48%</b>
 
   2. Grafique la función de probabilidad (o densidad) utilizada.
   
-  <r>Solo es cuestion de utilizar la funcion de plot que se tiene para R, usando de argumento para cada elemento de las abscisas, el precio, y en las ordenadas el resultado de la probabilidad de que ese precio sea lo que cueste el tanque de oxigeno</r>
+  <r>Solo es cuestion de utilizar la funcion de plot que se tiene para R, usando de argumento para cada elemento de las abscisas, la media muestral de sus precios, y en las ordenadas el resultado de su probabilidad</r>
   
   <b> Resultando en la grafica:</b>
 ```{r}
@@ -128,11 +124,14 @@ legend("topright", legend = c("p(x),1000<x<1200", "media"),lwd = 3, col = c("red
 
 ## Ejercicio 3
 
-Ante la demanda ocasionada por la pandemia de covid, se realizó una investigación de los precios por recargas de oxígeno medicinal en cilindros con capacidad para 10,000 litros de oxígeno. Si el precio ofrecido por los proveedores nacionales sigue una distribución normal con media de MX$731 y desviación estándar de MX$175:
+Ante la demanda ocasionada por la pandemia de covid, se realizó una investigación de los precios por recargas de oxígeno medicinal en cilindros con capacidad para 10,000 litros de oxígeno. Si el precio ofrecido por los proveedores nacionales sigue una distribución normal con media de MX$731$ y desviación estándar de MX$175$:
 
   1. Calcule el porcentaje de tanques cuyo precio oscila entre MX$600 y MX$700.
   
-  <r>Nuestro experimento es consultar el precio de recargas de oxígeno medicinal en cilindros, la variable aleatoria continua es el precio(ya que puede tomar valores entre dos numeros cualquiera), el espacio muestral y eventos serian todos los precios posibles, con una desviacion estandar de $\sigma=175$ y una media de $\mu=731$, por lo que se utiliza la funcion de densidad para el caso normal, con dichos datos, asi como el hecho que, para $f(x)$ para $a\leq x\leq b$, se calcula como $f(b)-f(a)$, o bien, en derminos de Rstudio, $dnorm(b,ds,\mu)-dnorm(a,ds,\mu)$ donde $ds=\sigma$</r>
+   <r>Experimento: consultar el precio de recargas de oxígeno medicinal en cilindros. Espacio muestral: {Numeros positivos}. Variable aleatoria: continua comun normal. $ds=\sigma=175,$ $\mu=731$. Comando en R para su funcion de densidad: "pnorm(x,ds,md)" donde x=media muestral, ds=desviacion estandar, md=media.
+  
+  Evento 1: Valor oscilando entre 600 y 700.</r>
+
 ```{r}
 md=731
 ds=175
@@ -144,17 +143,20 @@ pnorm(b,md,ds)-pnorm(a,md,ds)
   <b>Teniendo una probabilidad aproximada de 20.26%</b>
   
   2. Calcule el porcentaje de tanques cuyo precio es de al menos MX$800.
+  
+  <r>Evento 2: Valor al menos de 800.</r>
+
 ```{r}
 md=731
 ds=175
-a=800
-1-pnorm(a,md,ds)
+x=800
+1-pnorm(x,md,ds)
 ```
   <b>Teniendo una probabilidad aproximada de 34.67%</b>
 
   3. Grafique la función de probabilidad (o densidad) utilizada.
   
-  <r>Solo es cuestion de utilizar la funcion de plot que se tiene para R, usando de argumento para cada elemento de las abscisas, el precio, y en las ordenadas el resultado de la probabilidad de que la recarga cueste dicho precio</r>
+  <r>Solo es cuestion de utilizar la funcion de plot que se tiene para R, usando de argumento para cada elemento de las abscisas, el precio, y en las ordenadas la probabilidad</r>
   
   <b> Resultando en la grafica:</b>
 ```{r}
@@ -181,24 +183,30 @@ lines(x,dnorm(x,md,ds),type="h",col="purple")
 # Media
 lines(md,dnorm(md,md,ds),type="h",col="green",lwd=2)
 # Simbologia
-legend("topright", legend = c(paste0("P(",a1,"<X<",b1,")"),paste0("P(X≥",a2,")"),"media"),lwd = 3, col = c("red","purple","green"))
+legend("topright", legend = c(paste0("P(",a1,"≤X≤",b1,")"),paste0("P(X≥",a2,")"),"media"),lwd = 3, col = c("red","purple","green"))
 ```
 ## Ejercicio 4
 
 El primer filtro en un puesto de vacunación contra covid, consiste en preguntar a las personas si han presentado en la última semana alguno de los síntomas asociados a la enfermedad como tos y fiebre. Si alguna persona ha presentado al menos uno de estos síntomas, se le invita a pasar a responder un cuestionario más detallado con profesionales de la salud para decidir si es conveniente vacunarlo o no. Si de registros previos se sabe que el 97% de las personas que acuden a vacunarse no han presentado síntomas en la última semana:
 
   1. Calcule la probabilidad de que se necesiten encuestar a 100 personas para encontrar a la primera que pasará a responder el cuestionario detallado.
+
+   <r>Experimento: si la persona muestra sintomas. Espacio muestral: {Presentar sintomas(1/exito), no presentarlos(0/fallo)}. Probabilidad de exito: 3%. Variable aleatoria: comun discreta geometrica. Comando en R para su funcion de densidad: "dgeom(n,p)" donde n=fracasos antes del exito, p=probabilidad.
   
-  <r>El experimento en este caso es si la persona muestra sintomas, y por ende, pasa a contestar un cuestionario detallado, siendo el espacio muestra solamente el evento de presentar sintomas, o el evento de no presentarlos, hablando asi entonces de una variable discreta de Bernoulli, y como se calcula la cantidad de fallos necesarios para un exito, se puede entender que hablamos de distribucion geometrica, por lo que podemos usar la funcion de probabilidad geometrica, siendo el comando en R para calcular casos especificos "dgeom" y "pgeom" para casos de probabilidad acumulada. Teniendo asi entonces</r>
-  
+  Evento 1: Se necesite 100 personas (99 fracasos, 1 exito).</r>
+
 ```{r}
 n=100
 p=0.03
 dgeom(n-1,p) # Restando 1, ya que en R no se incluye el exito en la X, a diferencia de algunos libros y autores
 ```
+  
   <b>Teniendo una probabilidad aproximada de 00.15%</b>
 
   2. Calcule la probabilidad de que la 50° persona sea la primera que pasará a responder el cuestionario detallado.
+    
+  <r>Evento 2: Se necesite 50 personas (49 fracasos, 1 exito).</r>
+
 ```{r}
 n=50
 p=0.03
@@ -207,6 +215,9 @@ dgeom(n-1,p) # Restando 1, ya que en R no se incluye el exito en la X, a diferen
   <b>Teniendo una probabilidad aproximada de 00.67%</b>
 
   3. Calcule la probabilidad de que la primera persona encuestada sea la primera que pasará a responder el cuestionario detallado.
+  
+  <r>Evento 3: Se necesite 1 personas (0 fracasos, 1 exito).</r>
+
 ```{r}
 n=1
 p=0.03
@@ -217,7 +228,7 @@ dgeom(n-1,p) # Restando 1, ya que en R no se incluye el exito en la X, a diferen
   
   4. Grafique la función de probabilidad (o densidad) utilizada.
   
-  <b>Grafica</b>
+  <b>Grafica:</b>
 ```{r}
 n1=100
 n2=50
@@ -242,19 +253,25 @@ Durante el proceso de vacunación contra covid, se aplicaron en cierto centro de
 
   1. Calcule la probabilidad de que todas personas seleccionadas en la muestra hayan sido vacunadas con la vacuna Moderna.
   
-  <r>El experimento en este caso es saber que vacuna fue aplicada en una persona, siendo el espacio muestra el evento de ser vacunado con Moderna, o el evento de ser vacunados por Pfizer, hablando asi entonces de una variable discreta, y al elegir una muestra $n$ de entre $N(tipo1)+M(tipo2)$ objetos, se puede entender que hablamos de distribucion hipergeometrica, siendo el comando en R para calcular casos especificos "dhyper" y "phyper" para casos de probabilidad acumulada. Teniendo asi entonces</r>
+  <r>Experimento: saber cual vacuna fue aplicada en una persona. Espacio muestral: {vacunado con Moderna(N), vacunado con Pfizer(M)}. Variable aleatoria: comun discreta hipergeometrica. Comando en R para su funcion de densidad: "dhyper(q,N,M,n)" donde q=elementos tipo 1, N=tipo 1,M=tipo 2, n=tamaño de muestra.
+  
+  Evento 1: Muestra de 15, todos tipo 1.</r>
+  
 ```{r}
 n=15 # Muestra
 N=100 # Moderna / Tipo 1
 M=200 # Pfizer / Tipo 2
 q1=15 # Cantidad de interes del ejercicio 1
 
-phyper(q1,N,M,n) # Queremos la prob del tipo 1
+dhyper(q1,N,M,n) # Queremos la prob del tipo 1
 ```
 
-  <b>Teniendo una probabilidad aproximada de 3%</b>
+  <b>Teniendo una probabilidad aproximada de $3x10^{-6}$%</b>
   
   2. Calcule la probabilidad de que dos o más de las personas de la muestra hayan sido vacunadas con Moderna
+  
+  Evento 2: Muestra de 15, 2 o mas tipo 1.</r>
+  
 ```{r}
 n=15 # Muestra
 N=100 # Moderna / Tipo 1
@@ -266,13 +283,16 @@ q2=1 # Cantidad de interes del ejercicio 2 (Tomando en cuenta que F(x≥2)=1-F(X
   <b>Teniendo una probabilidad aproximada de 98.28%</b>
 
   3. Calcule la probabilidad de que entre 7 y 10 personas hayan sido vacunadas con Pfizer
+  
+  Evento 3: Muestra de 15, entre 7 y 10 tipo 2.</r>
+  
 ```{r}
 n=15 # Muestra
 N=100 # Moderna / Tipo 1
 M=200 # Pfizer / Tipo 2
 q3a=7 # Cantidad inicial de interes del ejercicio 3
 q3b=10 # Cantidad final de interes del ejercicio 3
-phyper(b,M,N,n)-phyper(a,M,N,n) # Queremos la resta de las prob del tipo 2 ( F(a<x<b) = F(b)-F(a) )
+phyper(q3b,M,N,n)-phyper(q3a,M,N,n) # Queremos la resta de las prob del tipo 2 ( F(a<x<b) = F(b)-F(a) )
 ```
   <b>Teniendo una probabilidad aproximada de 51.68%</b>
 
@@ -289,7 +309,7 @@ q2=1 # Cantidad de interes del ejercicio 2 (Tomando en cuenta que F(x≥2)=1-F(X
 q3a=7 # Cantidad inicial de interes del ejercicio 3
 q3b=10 # Cantidad final de interes del ejercicio 3
 
-plot(x,dhyper(x,N,M,n),main = "Personas vacunadas con la vacuna marca Pfzier",ylab = "Probabilidad f(q)", xlab = "Personas vacunadas con la vacuna marca Pfzier",col="blue")
+plot(x,dhyper(x,N,M,n),main = "Personas vacunadas con la vacuna marca Moderna",ylab = "Probabilidad f(q)", xlab = "Personas vacunadas con la vacuna marca Moderna",col="blue")
 #Ejercicio 1
 points(q1,dhyper(q1,N,M,n),col="red",lwd=3)
 #Ejercicio 2
@@ -298,7 +318,7 @@ points(q2,dhyper(q2,N,M,n),col="purple",lwd=3)
 x3<-seq(q3a+1,q3b-1,1)
 points(x3,dhyper(x3,N,M,n),col="cyan",lwd=3)
 # Simbologia
-legend("topright", legend = c(paste0("Inciso 1, q = ",q1),paste0("Inciso 2, q = ",q2),paste0("Inciso 3, ",q3a," > q > ",q3b)),lwd = 3, col = c("red","purple","cyan"))
+legend("topright", legend = c(paste0("Evento 1, q = ",q1),paste0("Evento 2, q = ",q2),paste0("Evento 3, ",q3a," > q > ",q3b)),lwd = 3, col = c("red","purple","cyan"))
 
 ```
   
@@ -313,7 +333,7 @@ q2=1 # Cantidad de interes del ejercicio 2 (Tomando en cuenta que F(x≥2)=1-F(X
 q3a=7 # Cantidad inicial de interes del ejercicio 3
 q3b=10 # Cantidad final de interes del ejercicio 3
 
-plot(x,dhyper(x,M,N,n),main = "Personas vacunadas con la vacuna marca Moderna",ylab = "Probabilidad f(q)", xlab = "Personas vacunadas con la vacuna marca Pfzier",col="blue")
+plot(x,dhyper(x,M,N,n),main = "Personas vacunadas con la vacuna marca Pfzier",ylab = "Probabilidad f(q)", xlab = "Personas vacunadas con la vacuna marca Pfzier",col="blue")
 #Ejercicio 1
 points(q1,dhyper(q1,M,N,n),col="red",lwd=3)
 #Ejercicio 2
@@ -322,6 +342,6 @@ points(q2,dhyper(q2,M,N,n),col="purple",lwd=3)
 x3<-seq(q3a+1,q3b-1,1)
 points(x3,dhyper(x3,M,N,n),col="cyan",lwd=3)
 # Simbologia
-legend("topleft", legend = c(paste0("Inciso 1, q = ",q1),paste0("Inciso 2, q = ",q2),paste0("Inciso 3, ",q3a," > q > ",q3b)),lwd = 3, col = c("red","purple","cyan"))
+legend("topleft", legend = c(paste0("Evento 1, q = ",q1),paste0("Evento 2, q = ",q2),paste0("Evento 3, ",q3a," > q > ",q3b)),lwd = 3, col = c("red","purple","cyan"))
 
 ```
