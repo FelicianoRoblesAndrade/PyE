@@ -314,11 +314,8 @@ plot(x,dhyper(x,N,M,n),main = "Personas vacunadas con la vacuna marca Moderna",y
 points(q1,dhyper(q1,N,M,n),col="red",lwd=3)
 #Ejercicio 2
 points(q2,dhyper(q2,N,M,n),col="purple",lwd=3)
-#Ejercicio 3
-x3<-seq(q3a+1,q3b-1,1)
-points(x3,dhyper(x3,N,M,n),col="cyan",lwd=3)
 # Simbologia
-legend("topright", legend = c(paste0("Evento 1, q = ",q1),paste0("Evento 2, q = ",q2),paste0("Evento 3, ",q3a," > q > ",q3b)),lwd = 3, col = c("red","purple","cyan"))
+legend("topright", legend = c(paste0("Evento 1, q = ",q1),paste0("Evento 2, q = ",q2)),lwd = 3, col = c("red","purple"))
 
 ```
   
@@ -334,14 +331,10 @@ q3a=7 # Cantidad inicial de interes del ejercicio 3
 q3b=10 # Cantidad final de interes del ejercicio 3
 
 plot(x,dhyper(x,M,N,n),main = "Personas vacunadas con la vacuna marca Pfzier",ylab = "Probabilidad f(q)", xlab = "Personas vacunadas con la vacuna marca Pfzier",col="blue")
-#Ejercicio 1
-points(q1,dhyper(q1,M,N,n),col="red",lwd=3)
-#Ejercicio 2
-points(q2,dhyper(q2,M,N,n),col="purple",lwd=3)
 #Ejercicio 3
 x3<-seq(q3a+1,q3b-1,1)
 points(x3,dhyper(x3,M,N,n),col="cyan",lwd=3)
 # Simbologia
-legend("topleft", legend = c(paste0("Evento 1, q = ",q1),paste0("Evento 2, q = ",q2),paste0("Evento 3, ",q3a," > q > ",q3b)),lwd = 3, col = c("red","purple","cyan"))
+legend("topleft", legend = c(paste0("Evento 3, ",q3a," > q > ",q3b)),lwd = 3, col = c("cyan"))
 
 ```
